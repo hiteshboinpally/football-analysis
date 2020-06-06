@@ -3,8 +3,9 @@ import pandas as pd
 
 def playoff_year(year):
     # filter the data
-    afc_path = 'CSVs/AFCPlayoffs/AFCPlayoffStandings' + year + '.csv'
-    nfc_path = 'CSVs/NFCPlayoffs/NFCPlayoffStandings' + year + '.csv'
+    main_path = 'cse-163-final-project/CSVs/'
+    afc_path = main_path + 'AFCPlayoffs/AFCPlayoffStandings' + year + '.csv'
+    nfc_path = main_path + 'NFCPlayoffs/NFCPlayoffStandings' + year + '.csv'
 
     afc = pd.read_csv(afc_path)
     nfc = pd.read_csv(nfc_path)

@@ -40,8 +40,8 @@ def plot_qb():
 
 def main():
     plot_qb()
-    
-    
+
+
 
 
 
