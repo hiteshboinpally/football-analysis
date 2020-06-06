@@ -1,21 +1,16 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+from central import playoff_year
 
 
 def avgs_per_year(year):
     # filter the data
-    afc_path = 'CSVs/AFCPlayoffs/AFCPlayoffStandings' + year + '.csv'
-    nfc_path = 'CSVs/NFCPlayoffs/NFCPlayoffStandings' + year + '.csv'
     scoring_path = 'CSVs/ScoringOffense/ScoringOffense' + year + '.csv'
 
-    afc = pd.read_csv(afc_path)
-    nfc = pd.read_csv(nfc_path)
     scoring = pd.read_csv(scoring_path)
     scoring = scoring.loc[0:31, :]
 
-    playoffs_afc = afc.loc[0:5, 'Tm'].apply(lambda name: name[0:-4])
-    playoffs_nfc = nfc.loc[0:5, 'Tm'].apply(lambda name: name[0:-4])
-    playoffs = list(pd.concat([playoffs_afc, playoffs_nfc]))
+    playoffs = playoff_year(year)
     is_playoffs = scoring['Tm'].isin(playoffs)
 
     playoffs_scoring = scoring[is_playoffs].fillna(0)
@@ -61,6 +56,7 @@ def plot_avgs(avgs, title):
 
 
 def main():
+    print("Start")
     avgs_2015 = avgs_per_year('2015')
     avgs_2016 = avgs_per_year('2016')
     avgs_2017 = avgs_per_year('2017')
