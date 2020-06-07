@@ -1,3 +1,10 @@
+"""
+Alan Liu and Hitesh Boinpally
+
+A python module that wrangles the quarterback data
+from 2015 to 2019 and creates a visualization to
+compare playoff and nonplayoff teams
+"""
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -7,10 +14,17 @@ sns.set()
 
 
 def get_qb(year):
+    """
+    Return a dataframe of quarterback stats from the given year
+    Each row represents a quarterback of that team, his
+    quarterback rating, the year for later merging.
+    Note that this dataframe only contains relevant quarterbacks
+    with more than 100 throwing attempts
+    """
     # Get data
     main_path = 'cse-163-final-project/CSVs/'
-    qb = pd.read_csv(main_path + '/QuarterbackPassing/QuaterbackPassing'
-                     + year + '.csv')
+    qb = pd.read_csv(main_path + '/QuarterbackPassing/QuaterbackPassing' +
+                     year + '.csv')
     playoff = playoff_year(year)
     # Filter for qb with at least 100 attempts and only for relevant columns
     attempt = (qb['Att'] > 100)
@@ -28,14 +42,25 @@ def get_qb(year):
 
 
 def get_combine():
+    """
+    Combine the dataframes of quarterback stats from
+    2015 to 2019
+    """
+    # Create a list of dataframe that stores the
+    # quarterback stats for each year
     qb = list()
     for year in range(2015, 2020):
         qb.append(get_qb(str(year)))
+    # Concat the dataframes by rows
     qb_all = pd.concat(qb)
     return qb_all
 
 
 def plot_qb(qb_data):
+    """
+    Plot and save a boxplot that compares the quarterback rating
+    between playoff and nonplayoff teams for all five years
+    """
     sns.boxplot(x='year', y='Rate', hue='is_playoff', data=qb_data)
     plt.title('Quarterback Ratings for Playoff and NonPlayoff Team by Year')
     plt.savefig('Q2QBRatings.png')
