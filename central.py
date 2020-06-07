@@ -1,8 +1,20 @@
+"""
+Alan Liu and Hitesh Boinpally
+CSE 163
+
+This file contains some helper methods that we can use in our main research
+question files.
+"""
+
+
 import pandas as pd
 
 
 def playoff_year(year):
-    # filter the data
+    """
+    Returns the playoff teams for the given years a list. Assumes that year
+    is a string representing a year between 2015 and 2019.
+    """
     main_path = 'cse-163-final-project/CSVs/'
     afc_path = main_path + 'AFCPlayoffs/AFCPlayoffStandings' + year + '.csv'
     nfc_path = main_path + 'NFCPlayoffs/NFCPlayoffStandings' + year + '.csv'
@@ -17,10 +29,15 @@ def playoff_year(year):
 
 
 def get_nfl_clean():
+    """
+    Cleans and returns the nfl_teams.csv file as a pandas DataFrame. Fixes all
+    abbreviations to fit Pro Football References abbreviations and adds in
+    previously existing teams.
+    """
     main_path = 'cse-163-final-project/CSVs/'
     nfl_teams = pd.read_csv(main_path + 'nfl_teams.csv')
     # Select only relevant columns
-    nfl_teams = nfl_teams[['Name','Abbreviation']]
+    nfl_teams = nfl_teams[['Name', 'Abbreviation']]
     # Fix name
     nfl_teams.loc[20, 'Name'] = 'New York Giants'
     nfl_teams.loc[21, 'Name'] = 'New York Jets'
@@ -41,5 +58,3 @@ def get_nfl_clean():
     nfl_teams.loc[18, 'Abbreviation'] = 'NWE'
     nfl_teams.rename({'Abbreviation': 'Abbrev'}, axis=1, inplace=True)
     return nfl_teams
-
-#if __name__ == '__main__':
