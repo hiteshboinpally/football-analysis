@@ -4,6 +4,12 @@ from central import playoff_year
 
 
 def avgs_per_year(year):
+    """
+    Calculates and returns a list of three dictionaries for the given year of
+    the average touchdowns on offense, defense, and special teams for playoff
+    and non-playoff teams from that year. First dictionary is offense, second
+    is defense, third is special teams. Assumes given year is a string.
+    """
     # filter the data
     main_path = 'cse-163-final-project/CSVs/'
     scoring_path = main_path + 'ScoringOffense/ScoringOffense' + year + '.csv'
@@ -29,7 +35,7 @@ def avgs_per_year(year):
     playoffs_st_avg, non_playoffs_st_avg = get_avgs('PR TD', 'KR TD',
                                                     playoffs_scoring,
                                                     non_playoffs_scoring)
-    # return the avgs somehow
+    # return the avgs
     return [
              {'Year': year, 'Playoff Teams': playoffs_off_avg,
               'Non-Playoff Teams': non_playoffs_off_avg},
@@ -41,6 +47,13 @@ def avgs_per_year(year):
 
 
 def get_avgs(category1, category2, playoffs, non_playoffs):
+    """
+    Calculates and returns the total average scoring in the given category1
+    and category2 for each of the given playoffs and non_playoffs as a tuple
+    of two elements. Assumes that given categories are strings and valid
+    columns of given playoffs and non_playoffs. Assumes that given playoffs
+    and non_playoffs are pandas DataFrames.
+    """
     playoffs_avg = playoffs[category1].mean() + \
         playoffs[category2].mean()
     non_playoffs_avg = non_playoffs[category1].mean() + \
@@ -49,6 +62,12 @@ def get_avgs(category1, category2, playoffs, non_playoffs):
 
 
 def plot_avgs(avgs, title):
+    """
+    Plots and saves the given avgs with the x-axis as Years and y-axis as
+    scoring. Titles the graph and saved file based on given category. Assumes
+    that given category is a string. Assumes that given avgs is a list of
+    dictionaries containing 'Year' and playoff team vs non-playoff team data.
+    """
     avgs_df = pd.DataFrame(data=avgs)
     avgs_df.plot(x='Year')
     plt.ylabel('Average Touchdowns')
