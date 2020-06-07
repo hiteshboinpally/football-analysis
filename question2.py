@@ -8,7 +8,8 @@ sns.set()
 
 def get_qb(year):
     # Get data
-    qb = pd.read_csv('CSVs\QuarterbackPassing\QuaterbackPassing' + year + '.csv')
+    main_path = 'cse-163-final-project/CSVs/'
+    qb = pd.read_csv(main_path + '/QuarterbackPassing/QuaterbackPassing' + year + '.csv')
     playoff = playoff_year(year)
     # Filter for qb with at least 100 attempts and only for relevant columns
     attempt = (qb['Att'] > 100)

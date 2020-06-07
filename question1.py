@@ -5,7 +5,8 @@ from central import playoff_year
 
 def avgs_per_year(year):
     # filter the data
-    scoring_path = 'CSVs/ScoringOffense/ScoringOffense' + year + '.csv'
+    main_path = 'cse-163-final-project/CSVs/'
+    scoring_path = main_path + 'ScoringOffense/ScoringOffense' + year + '.csv'
 
     scoring = pd.read_csv(scoring_path)
     scoring = scoring.loc[0:31, :]

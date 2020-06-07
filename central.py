@@ -17,7 +17,8 @@ def playoff_year(year):
 
 
 def get_nfl_clean():
-    nfl_teams = pd.read_csv('CSVs/nfl_teams.csv')
+    main_path = 'cse-163-final-project/CSVs/'
+    nfl_teams = pd.read_csv(main_path + 'nfl_teams.csv')
     # Select only relevant columns
     nfl_teams = nfl_teams[['Name','Abbreviation']]
     # Fix name
