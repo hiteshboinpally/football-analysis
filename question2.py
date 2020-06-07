@@ -32,7 +32,7 @@ def get_qb(year):
     qb = qb[['Tm', 'Rate']]
     # Get NFL team abbreviation and merge qb and team data
     nfl_teams = get_nfl_clean()
-    qb = qb.merge(nfl_teams, how="inner", left_on="Tm", right_on='Abbrev')
+    qb = qb.merge(nfl_teams, how='inner', left_on='Tm', right_on='Abbrev')
     # Distinguish playoff and non-playoff team
     is_playoffs = qb['Name'].isin(playoff)
     qb.loc[:, 'is_playoff'] = is_playoffs
@@ -56,19 +56,19 @@ def get_combine():
     return qb_all
 
 
-def plot_qb():
+def plot_qb(qb_data):
     """
     Plot and save a boxplot that compares the quarterback rating
     between playoff and nonplayoff teams for all five years
     """
-    sns.boxplot(x="year", y="Rate", hue="is_playoff",
-                data=get_combine())
-    plt.title('QuarterRating for Playoff and NonPlayoff Team by Year')
-    plt.savefig('Question2.png')
+    sns.boxplot(x='year', y='Rate', hue='is_playoff', data=qb_data)
+    plt.title('Quarterback Ratings for Playoff and NonPlayoff Team by Year')
+    plt.savefig('Q2QBRatings.png')
 
 
 def main():
-    plot_qb()
+    data = get_combine()
+    plot_qb(data)
 
 
 if __name__ == "__main__":

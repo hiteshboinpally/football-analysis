@@ -1,3 +1,13 @@
+"""
+Alan Liu and Hitesh Boinpally
+CSE 163
+
+This file answers research question #1, plotting average scoring for each
+category of Offense, Defense, and Special Teams, separated between playoff and
+non-playoff teams from the past five years.
+"""
+
+
 import pandas as pd
 import matplotlib.pyplot as plt
 from central import playoff_year
@@ -15,7 +25,8 @@ def avgs_per_year(year):
     scoring_path = main_path + 'ScoringOffense/ScoringOffense' + year + '.csv'
 
     scoring = pd.read_csv(scoring_path)
-    scoring = scoring.loc[0:31, :]
+    needed_cols = ['Tm', 'RshTD', 'RecTD', 'IntTD', 'FblTD', 'PR TD', 'KR TD']
+    scoring = scoring.loc[0:31, needed_cols]
 
     playoffs = playoff_year(year)
     is_playoffs = scoring['Tm'].isin(playoffs)
@@ -72,11 +83,10 @@ def plot_avgs(avgs, title):
     avgs_df.plot(x='Year')
     plt.ylabel('Average Touchdowns')
     plt.title('Average Touchdowns in ' + title + ' per Year')
-    plt.savefig(title + 'Averages.png')
+    plt.savefig('Q1' + title + 'Averages.png')
 
 
 def main():
-    print("Start")
     avgs_2015 = avgs_per_year('2015')
     avgs_2016 = avgs_per_year('2016')
     avgs_2017 = avgs_per_year('2017')
@@ -91,8 +101,7 @@ def main():
                avgs_2019[2]]
     plot_avgs(off_avgs, "Offense")
     plot_avgs(def_avgs, "Defense")
-    plot_avgs(st_avgs, "Special Teams")
-    print('completed')
+    plot_avgs(st_avgs, "SpecialTeams")
 
 
 if __name__ == "__main__":
