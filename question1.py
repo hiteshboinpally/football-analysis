@@ -23,10 +23,11 @@ def avgs_per_year(year, test=False):
     test_str = ""
     if test:
         test_str = "Test"
-    
+
     # filter the data
     main_path = 'cse-163-final-project/CSVs/'
-    scoring_path = main_path + 'ScoringOffense/' + test_str + 'ScoringOffense' + year + '.csv'
+    scoring_path = main_path + 'ScoringOffense/' + test_str \
+        + 'ScoringOffense' + year + '.csv'
 
     scoring = pd.read_csv(scoring_path)
     needed_cols = ['Tm', 'RshTD', 'RecTD', 'IntTD', 'FblTD', 'PR TD', 'KR TD']

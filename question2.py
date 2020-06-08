@@ -24,11 +24,11 @@ def get_qb(year, test=False):
     test_str = ""
     if test:
         test_str = "Test"
-    
+
     # Get data
     main_path = 'cse-163-final-project/CSVs/'
-    qb = pd.read_csv(main_path + '/QuarterbackPassing/' + test_str + 'QuaterbackPassing' +
-                     year + '.csv')
+    qb = pd.read_csv(main_path + '/QuarterbackPassing/' + test_str +
+                     'QuaterbackPassing' + year + '.csv')
     playoff = playoff_year(year)
     # Filter for qb with at least 100 attempts and only for relevant columns
     attempt = (qb['Att'] > 100)

@@ -19,7 +19,7 @@ def test_question1():
     scoring_test = list()
     for year in range(2015, 2020):
         scoring_test.append(question1.avgs_per_year(str(year), test=True))
-    
+
     off_avgs = []
     def_avgs = []
     st_avgs = []
@@ -47,8 +47,9 @@ def test_offense():
     Test the offense data of question3.py with small test file
     We confirm that offense plot is correct
     """
-    offensive_test = question3.get_team_data('2015', 'TeamOffense/TestTeamOffense',
-                                  ['Tm', 'Y/P', '1stD', 'Yds.3'])
+    offensive_test = question3.get_team_data('2015',
+                                             'TeamOffense/TestTeamOffense',
+                                             ['Tm', 'Y/P', '1stD', 'Yds.3'])
     question3.offensive_plots(offensive_test, 'Q3OffensiveTest')
 
 
@@ -57,8 +58,9 @@ def test_sp():
     Test the special team data of question3.py with small test file
     We confirm that special team plot is correct
     """
-    special_test = question3.get_team_data('2015',
-                                           'KickAndPuntReturns/TestKickAndPuntReturns', ['Tm', 'Y/R', 'Y/Rt'])
+    folder = 'KickAndPuntReturns/TestKickAndPuntReturns'
+    special_test = question3.get_team_data('2015', folder,
+                                           ['Tm', 'Y/R', 'Y/Rt'])
     question3.special_plots(special_test, 'Q3SpecialTest')
 
 
@@ -89,4 +91,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    

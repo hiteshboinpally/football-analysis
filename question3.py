@@ -26,13 +26,13 @@ def get_team_defense(year, test=False):
     test_str = ""
     if test:
         test_str = "Test"
-    
-    conversions = get_team_data(year, 'ConversionsAgainst/' + test_str + 'ConversionsAgainst',
-                                ['Tm', '3D%'])
+
+    conversions = get_team_data(year, 'ConversionsAgainst/' + test_str +
+                                'ConversionsAgainst', ['Tm', '3D%'])
     conversions['3D%'] = conversions['3D%'].apply(lambda s: float(s[0:-1]))
 
-    drives = get_team_data(year, 'DriveAvgsAgainst/' + test_str + 'DriveAvgsAgainst',
-                           ['Tm', 'TO%'])
+    drives = get_team_data(year, 'DriveAvgsAgainst/' + test_str +
+                           'DriveAvgsAgainst', ['Tm', 'TO%'])
 
     merge_cols = ['Tm', 'Is Playoff', 'Year']
     all_defense = conversions.merge(drives, left_on=merge_cols,
