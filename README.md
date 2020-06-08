@@ -2,8 +2,7 @@
 
 1. Make sure you have the standard cse163 environment or equivalent libraries installed
 
-2. Download the zip file or clone the GitLab repo. (I have sent invitations). If you choose the second option, click
-[here](https://gitlab.cs.washington.edu/alnliu11/cse-163-final-project) and use `git clone` in your shell
+2. Download the zip file or clone the GitLab repo. (I have sent invitations). If you choose the first option you will also need to download the CSVs from the google folder [here](https://drive.google.com/open?id=1HLAZn_CP7OVrA32koCkv49vTWwZ_06Wi) and place the unzipped folder within the directory. If you're on a mac, place them into the cse-163-final-project folder. If you choose the second option, click [here](https://gitlab.cs.washington.edu/alnliu11/cse-163-final-project) and use `git clone` in your shell.
 
 3. Open python modules `question1.py`, `question2.py`, `question3.py`, and `test.py` and run them
 
