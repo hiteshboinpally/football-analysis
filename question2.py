@@ -13,7 +13,7 @@ from central import playoff_year, get_nfl_clean
 sns.set()
 
 
-def get_qb(year):
+def get_qb(year, test=False):
     """
     Return a dataframe of quarterback stats from the given year
     Each row represents a quarterback of that team, his
@@ -21,9 +21,13 @@ def get_qb(year):
     Note that this dataframe only contains relevant quarterbacks
     with more than 100 throwing attempts
     """
+    test_str = ""
+    if test:
+        test_str = "Test"
+    
     # Get data
     main_path = 'cse-163-final-project/CSVs/'
-    qb = pd.read_csv(main_path + '/QuarterbackPassing/QuaterbackPassing' +
+    qb = pd.read_csv(main_path + '/QuarterbackPassing/' + test_str + 'QuaterbackPassing' +
                      year + '.csv')
     playoff = playoff_year(year)
     # Filter for qb with at least 100 attempts and only for relevant columns
@@ -56,19 +60,19 @@ def get_combine():
     return qb_all
 
 
-def plot_qb(qb_data):
+def plot_qb(qb_data, title):
     """
     Plot and save a boxplot that compares the quarterback rating
     between playoff and nonplayoff teams for all five years
     """
     sns.boxplot(x='year', y='Rate', hue='is_playoff', data=qb_data)
     plt.title('Quarterback Ratings for Playoff and NonPlayoff Team by Year')
-    plt.savefig('Q2QBRatings.png')
+    plt.savefig('plots/' + title + '.png')
 
 
 def main():
     data = get_combine()
-    plot_qb(data)
+    plot_qb(data, 'Q2QBRatings')
 
 
 if __name__ == "__main__":
