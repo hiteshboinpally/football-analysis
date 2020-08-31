@@ -16,19 +16,23 @@ from central import playoff_year
 sns.set()
 
 
-def get_team_defense(year):
+def get_team_defense(year, test=False):
     """
     Generates and returns a pandas DataFrame containing miscellaneous defensive
     data for the given year. Returned DataFrame also has columns for Year and
     whether or not the team was a playoff team that year. Assumes year is a
     string representing a year between 2015-2019.
     """
-    conversions = get_team_data(year, 'ConversionsAgainst/ConversionsAgainst',
-                                ['Tm', '3D%'])
+    test_str = ""
+    if test:
+        test_str = "Test"
+
+    conversions = get_team_data(year, 'ConversionsAgainst/' + test_str +
+                                'ConversionsAgainst', ['Tm', '3D%'])
     conversions['3D%'] = conversions['3D%'].apply(lambda s: float(s[0:-1]))
 
-    drives = get_team_data(year, 'DriveAvgsAgainst/DriveAvgsAgainst',
-                           ['Tm', 'TO%'])
+    drives = get_team_data(year, 'DriveAvgsAgainst/' + test_str +
+                           'DriveAvgsAgainst', ['Tm', 'TO%'])
 
     merge_cols = ['Tm', 'Is Playoff', 'Year']
     all_defense = conversions.merge(drives, left_on=merge_cols,
@@ -85,7 +89,7 @@ def combine_team(folder, cols):
     return all_team
 
 
-def offensive_plots(off_data):
+def offensive_plots(off_data, title):
     """
     Plots and saves miscellaneous offensive data from the past five years
     based on the given off_data. Assumes that off_data is a pandas DataFrame
@@ -109,10 +113,10 @@ def offensive_plots(off_data):
     fig.suptitle('Miscellaneous Offensive Stats by Year', fontsize=20)
     plt.subplots_adjust(hspace=0.3)
 
-    fig.savefig('Q3OffensiveData.png')
+    fig.savefig('plots/' + title + '.png')
 
 
-def special_plots(sp_data):
+def special_plots(sp_data, title):
     """
     Plots and saves miscellaneous special teams data from the past five years
     based on the given sp_data. Assumes that sp_data is a pandas DataFrame
@@ -132,10 +136,10 @@ def special_plots(sp_data):
     fig.suptitle('Miscellaneous Special Team Stats by Year', fontsize=20)
     plt.subplots_adjust(hspace=0.3)
 
-    fig.savefig('Q3SpecialTeamsData.png')
+    fig.savefig('plots/' + title + '.png')
 
 
-def defensive_plots(def_data):
+def defensive_plots(def_data, title):
     """
     Plots and saves miscellaneous defensive data from the past five years
     based on the given def_data. Assumes that def_data is a pandas DataFrame
@@ -156,7 +160,7 @@ def defensive_plots(def_data):
     fig.suptitle('Miscellaneous Defensive Stats by Year', fontsize=20)
     plt.subplots_adjust(hspace=0.3)
 
-    fig.savefig('Q3DefensiveData.png')
+    fig.savefig('plots/' + title + '.png')
 
 
 def adjust_size(ax, ylabel, xlabel='Year'):
@@ -173,16 +177,16 @@ def adjust_size(ax, ylabel, xlabel='Year'):
 def main():
     offensive_data = combine_team('TeamOffense/TeamOffense',
                                   ['Tm', 'Y/P', '1stD', 'Yds.3'])
-    offensive_plots(offensive_data)
+    offensive_plots(offensive_data, 'Q3OffensiveData')
     print('finished offensive plot')
 
     sp_data = combine_team('KickAndPuntReturns/KickAndPuntReturns',
                            ['Tm', 'Y/R', 'Y/Rt'])
-    special_plots(sp_data)
+    special_plots(sp_data, 'Q3SpecialTeamsData')
     print('finished special teams plot')
 
     def_data = combine_defense()
-    defensive_plots(def_data)
+    defensive_plots(def_data, 'Q3DefensiveData')
     print('finished defensive plot')
 
 

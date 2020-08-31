@@ -13,16 +13,21 @@ import matplotlib.pyplot as plt
 from central import playoff_year
 
 
-def avgs_per_year(year):
+def avgs_per_year(year, test=False):
     """
     Calculates and returns a list of three dictionaries for the given year of
     the average touchdowns on offense, defense, and special teams for playoff
     and non-playoff teams from that year. First dictionary is offense, second
     is defense, third is special teams. Assumes given year is a string.
     """
+    test_str = ""
+    if test:
+        test_str = "Test"
+
     # filter the data
     main_path = 'cse-163-final-project/CSVs/'
-    scoring_path = main_path + 'ScoringOffense/ScoringOffense' + year + '.csv'
+    scoring_path = main_path + 'ScoringOffense/' + test_str \
+        + 'ScoringOffense' + year + '.csv'
 
     scoring = pd.read_csv(scoring_path)
     needed_cols = ['Tm', 'RshTD', 'RecTD', 'IntTD', 'FblTD', 'PR TD', 'KR TD']
@@ -83,7 +88,7 @@ def plot_avgs(avgs, title):
     avgs_df.plot(x='Year')
     plt.ylabel('Average Touchdowns')
     plt.title('Average Touchdowns in ' + title + ' per Year')
-    plt.savefig('Q1' + title + 'Averages.png')
+    plt.savefig('plots/Q1' + title + 'Averages.png')
 
 
 def main():
