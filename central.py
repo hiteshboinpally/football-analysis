@@ -15,7 +15,7 @@ def playoff_year(year):
     Returns the playoff teams for the given years a list. Assumes that year
     is a string representing a year between 2015 and 2019.
     """
-    main_path = 'cse-163-final-project/CSVs/'
+    main_path = 'football-analysis/CSVs/'
     afc_path = main_path + 'AFCPlayoffs/AFCPlayoffStandings' + year + '.csv'
     nfc_path = main_path + 'NFCPlayoffs/NFCPlayoffStandings' + year + '.csv'
 
@@ -34,7 +34,7 @@ def get_nfl_clean():
     abbreviations to fit Pro Football References abbreviations and adds in
     previously existing teams.
     """
-    main_path = 'cse-163-final-project/CSVs/'
+    main_path = 'football-analysis/CSVs/'
     nfl_teams = pd.read_csv(main_path + 'nfl_teams.csv')
     # Select only relevant columns
     nfl_teams = nfl_teams[['Name', 'Abbreviation']]

@@ -50,7 +50,7 @@ def get_team_data(year, folder, cols):
     between 2015-2019. Assumes that folder is a valid file path as a string.
     Assumes that cols is a valid list of columns for the specified dataset.
     """
-    main_path = 'cse-163-final-project/CSVs/'
+    main_path = 'football-analysis/CSVs/'
     file_path = main_path + folder + year + '.csv'
 
     team_data = pd.read_csv(file_path, skiprows=1)
