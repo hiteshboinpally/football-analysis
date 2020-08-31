@@ -25,7 +25,7 @@ def avgs_per_year(year, test=False):
         test_str = "Test"
 
     # filter the data
-    main_path = 'cse-163-final-project/CSVs/'
+    main_path = 'football-analysis/CSVs/'
     scoring_path = main_path + 'ScoringOffense/' + test_str \
         + 'ScoringOffense' + year + '.csv'
 
